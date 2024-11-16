@@ -9,7 +9,7 @@ defmodule Bee.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Bee.Worker.start_link(arg)
-      # {Bee.Worker, arg}
+      {Bee.Worker, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
