@@ -7,6 +7,12 @@ defmodule Bee.Application do
 
   @impl true
   def start(_type, _args) do
+    case Node.self() do
+      :node1@comps2018 -> Node.connect(:node2@comps2018)
+      :node2@comps2018 -> Node.connect(:node1@comps2018)
+      node -> dbg(node)
+    end
+
     children = [
       # Starts a worker by calling: Bee.Worker.start_link(arg)
       {Bee.Worker, []}
