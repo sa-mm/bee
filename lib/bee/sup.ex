@@ -19,9 +19,13 @@ defmodule Bee.Sup do
       {Bee.Worker, []}
     ]
     |> Enum.map(fn child ->
-      Task.start(fn ->
-        start_child(child)
-      end)
+      Task.Supervisor.start_child(
+        Bee.TaskSupervisor,
+        fn ->
+          start_child(child)
+        end,
+        restart: :transient
+      )
     end)
 
     DynamicSupervisor.init(strategy: :one_for_one)

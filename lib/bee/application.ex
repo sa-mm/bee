@@ -14,6 +14,7 @@ defmodule Bee.Application do
     end
 
     children = [
+      {Task.Supervisor, name: Bee.TaskSupervisor},
       # Starts a worker by calling: Bee.Worker.start_link(arg)
       {Bee.Sup, []}
     ]
